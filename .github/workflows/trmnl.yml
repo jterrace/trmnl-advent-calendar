@@ -48,7 +48,8 @@ jobs:
   push:
     # Take test out of needs to push to TRMNL even when the tests fail.
     needs: [lint, test]
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    # Disabled until the plugin is set up on TRMNL: remove `false &&` to enable.
+    if: false && github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
