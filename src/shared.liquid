@@ -32,3 +32,24 @@
   {% assign today_seconds = today | date: "%s" %}
   {% assign days_until_advent = target_seconds | minus: today_seconds | divided_by: 86400 %}
 {% endif %}
+
+{% comment %} Item name for today's door {% endcomment %}
+{% assign door_names = "Snowflake,Mitten,Hot Cocoa,Penguin,Candy Cane,Pinecone,Snowman,Ice Skates,Polar Bear,Gingerbread Man,Ugly Sweater,Sled,Snow Globe,Holly,Reindeer,Stocking,Nutcracker,Ornament,Wreath,Elf,Present,Gingerbread House,Cookies and Milk,Santa's Sleigh,Christmas Tree" | split: "," %}
+{% if door %}
+  {% assign door_index = door | minus: 1 %}
+  {% assign door_name = door_names[door_index] %}
+{% endif %}
+
+<style>
+  .advent-main { flex: 1; min-height: 0; }
+  .advent-art {
+    height: 100%;
+    aspect-ratio: 1;
+    border: 4px solid currentColor;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .advent-dots { width: 100%; height: 32px; }
+</style>

@@ -1,6 +1,31 @@
-<div class="layout layout--col layout--center">
-  <span class="title title--large">{{ year }}-{{ month }}-{{ day }}</span>
-  <span class="title">state={{ state }} door={{ door }} christmas={{ days_until_christmas }} advent={{ days_until_advent }}</span>
+<div class="layout layout--col gap--medium">
+  <div class="advent-main flex flex--row gap--xlarge w--full">
+    <div class="advent-art flex-none">
+      <span class="label">{{ door_name }}</span>
+    </div>
+    <div class="flex flex--col flex--center-y flex--left gap--small flex-auto">
+      <span class="value value--mega">{{ day }}</span>
+      <span class="title title--xlarge">December</span>
+      <span class="title title--large">
+        <b>{{ days_until_christmas }}</b> {% if days_until_christmas == 1 %}day{% else %}days{% endif %} until Christmas
+      </span>
+      <span class="label label--xlarge label--inverted">{{ door_name }}</span>
+    </div>
+  </div>
+
+  <svg class="advent-dots" viewBox="0 0 750 32">
+    {% for i in (1..25) %}
+      {% assign cx = i | times: 30 | minus: 15 %}
+      {% if i < door %}
+        <circle cx="{{ cx }}" cy="16" r="7" fill="currentColor" />
+      {% elsif i == door %}
+        <circle cx="{{ cx }}" cy="16" r="7" fill="currentColor" />
+        <circle cx="{{ cx }}" cy="16" r="12.5" fill="none" stroke="currentColor" stroke-width="3" />
+      {% else %}
+        <circle cx="{{ cx }}" cy="16" r="6" fill="none" stroke="currentColor" stroke-width="3" />
+      {% endif %}
+    {% endfor %}
+  </svg>
 </div>
 
 <div class="title_bar">
