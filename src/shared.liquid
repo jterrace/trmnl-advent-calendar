@@ -1,1 +1,34 @@
+{% comment %}
+  Date logic. Outputs:
+    state                 "advent" | "christmas" | "offseason"
+    door                  1-25 (advent/christmas only)
+    days_until_christmas  24..0 (advent/christmas only)
+    days_until_advent     days until the next Dec 1 (offseason only)
+{% endcomment %}
 
+{% comment %} TRMNL's days_ago returns a Date in the given zone, so 0 days ago is the user's local today {% endcomment %}
+{% assign today = 0 | days_ago: trmnl.user.time_zone_iana %}
+{% assign year = today | date: "%Y" | plus: 0 %}
+{% assign month = today | date: "%-m" | plus: 0 %}
+{% assign day = today | date: "%-d" | plus: 0 %}
+
+{% if month == 12 and day <= 24 %}
+  {% assign state = "advent" %}
+  {% assign door = day %}
+  {% assign days_until_christmas = 25 | minus: day %}
+{% elsif month == 12 and day == 25 %}
+  {% assign state = "christmas" %}
+  {% assign door = 25 %}
+  {% assign days_until_christmas = 0 %}
+{% else %}
+  {% assign state = "offseason" %}
+  {% if month == 12 %}
+    {% assign target_year = year | plus: 1 %}
+  {% else %}
+    {% assign target_year = year %}
+  {% endif %}
+  {% comment %} Both sides are midnight UTC, so the difference is a whole number of days {% endcomment %}
+  {% assign target_seconds = target_year | append: "-12-01T00:00:00Z" | date: "%s" %}
+  {% assign today_seconds = today | date: "%s" %}
+  {% assign days_until_advent = target_seconds | minus: today_seconds | divided_by: 86400 %}
+{% endif %}
