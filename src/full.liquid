@@ -11,6 +11,8 @@
     </div>
   </div>
   {% else %}
+  {% comment %} Doors below in landscape, down the right side in portrait {% endcomment %}
+  <div class="advent-body flex flex--col gap--medium portrait:flex--row">
   <div class="advent-main flex flex--row gap--xlarge w--full portrait:flex--col portrait:flex--center-x">
     <div class="advent-art flex flex--center-x flex--center-y flex-none">
       {% render "door_art", door: door, door_name: door_name %}
@@ -29,7 +31,9 @@
     </div>
   </div>
 
-  {% render "doors", door: door %}
+  {% render "doors", door: door, class: "portrait:hidden" %}
+  {% render "doors", door: door, vertical: true, class: "landscape:hidden" %}
+  </div>
   {% endif %}
 </div>
 

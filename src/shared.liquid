@@ -57,16 +57,24 @@
   .advent-art--mirrored .advent-drawing { transform: scaleX(-1); }
   /* Shapes filled with the screen background: white, or black in dark mode */
   .advent-drawing .paper { fill: var(--framework-semantic-canvas-bg-color, white); }
+  .advent-body { flex: 1; min-height: 0; width: 100%; }
   .advent-doors { width: 100%; height: auto; flex-shrink: 0; }
+  .advent-doors--vertical { width: auto; height: 100%; }
   /* Compact: thicker strokes, and no ring (the last opened door is today) */
   .advent-doors--compact rect { stroke-width: 6; }
   .advent-doors--compact .advent-doors__ring { display: none; }
 </style>
 
-{% comment %} Progress row. Usage: {% render "doors", door: door %}; add compact: true at small sizes {% endcomment %}
+{% comment %}
+  Progress row. Usage: {% render "doors", door: door %}
+  Options: compact: true at small sizes; vertical: true for a column (door 1 at the top);
+  class: "..." for extra classes, e.g. "portrait:hidden".
+{% endcomment %}
 {% template doors %}
-<svg class="advent-doors{% if compact %} advent-doors--compact{% endif %}" viewBox="0 0 750 32">
-  {% comment %} Doors: opened (outlined) up to today, today ringed, closed (solid) after {% endcomment %}
+<svg class="advent-doors{% if compact %} advent-doors--compact{% endif %}{% if vertical %} advent-doors--vertical{% endif %} {{ class }}" viewBox="{% if vertical %}0 0 32 750{% else %}0 0 750 32{% endif %}">
+  {% comment %} Doors: opened (outlined) up to today, today ringed, closed (solid) after.
+     Drawn as a row; for vertical, the matrix swaps x and y. {% endcomment %}
+  <g{% if vertical %} transform="matrix(0 1 1 0 0 0)"{% endif %}>
   {% for i in (1..25) %}
     {% assign x = i | times: 30 | minus: 23 %}
     {% if i <= door %}
@@ -79,6 +87,7 @@
       <rect x="{{ x | minus: 1 }}" y="8" width="16" height="16" rx="2" fill="currentColor" />
     {% endif %}
   {% endfor %}
+  </g>
 </svg>
 {% endtemplate %}
 
