@@ -29,16 +29,18 @@
     </div>
   </div>
 
-  <svg class="advent-dots" viewBox="0 0 750 32">
+  <svg class="advent-doors" viewBox="0 0 750 32">
+    {% comment %} Doors: opened (outlined) up to today, today ringed, closed (solid) after {% endcomment %}
     {% for i in (1..25) %}
-      {% assign cx = i | times: 30 | minus: 15 %}
-      {% if i < door %}
-        <circle cx="{{ cx }}" cy="16" r="7" fill="currentColor" />
-      {% elsif i == door %}
-        <circle cx="{{ cx }}" cy="16" r="7" fill="currentColor" />
-        <circle cx="{{ cx }}" cy="16" r="12.5" fill="none" stroke="currentColor" stroke-width="3" />
+      {% assign x = i | times: 30 | minus: 23 %}
+      {% if i <= door %}
+        <rect x="{{ x }}" y="9" width="14" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="3" />
+        {% if i == door %}
+          {% assign ring_x = x | minus: 6 %}
+          <rect x="{{ ring_x }}" y="3" width="26" height="26" rx="4" fill="none" stroke="currentColor" stroke-width="3" />
+        {% endif %}
       {% else %}
-        <circle cx="{{ cx }}" cy="16" r="6" fill="none" stroke="currentColor" stroke-width="3" />
+        <rect x="{{ x | minus: 1 }}" y="8" width="16" height="16" rx="2" fill="currentColor" />
       {% endif %}
     {% endfor %}
   </svg>
