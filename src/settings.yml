@@ -1,8 +1,3 @@
-#
-# Changes to this file will be overwritten by `trmnlp pull`.
-#
-# Docs: https://help.trmnl.com/en/articles/10542599-importing-and-exporting-private-plugins#h_581fb988f0
-#
 ---
 strategy: static
 no_screen_padding: 'no'
@@ -10,14 +5,20 @@ dark_mode: 'no'
 static_data: ''
 polling_verb: get
 framework_version: latest
+serverless_language:
+refresh_interval_floor:
 polling_url: ''
-polling_headers: ''
-name: Advent Calendar
-description: ''
-refresh_interval: 1440
+polling_headers:
+polling_body:
+id: 533113
+oauth_enabled: 'false'
+oauth_pkce_enabled: 'no'
 custom_fields:
-- keyname: author_bio
+- keyname: about
   name: About This Plugin
   field_type: author_bio
-  description: A daily advent calendar from December 1 to 25, with a sleeping Santa the rest of the year.
+  description: A daily advent calendar for December, with a new drawing behind each door and a countdown to Christmas. A sleeping Santa counts down the rest of the year.
   github_url: https://github.com/jterrace/trmnl-advent-calendar
+name: Advent Calendar
+description: 'A fun Christmas Advent calendar'
+refresh_interval: 90
