@@ -13,7 +13,7 @@
   {% else %}
   <div class="advent-main flex flex--row gap--xlarge w--full">
     <div class="advent-art flex-none">
-      <span class="label">{{ door_name }}</span>
+      {% render "door_art", door: door, door_name: door_name %}
     </div>
     <div class="flex flex--col flex--center-y flex--left gap--small flex-auto">
       <span class="value value--mega">{{ day }}</span>

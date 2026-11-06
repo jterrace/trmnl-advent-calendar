@@ -23,7 +23,7 @@ RSpec.describe 'Advent Calendar' do
     {
       '2026-11-30T12:00:00Z' => 'Sleeping Santa 1 day until the Advent Calendar',
       '2026-12-01T12:00:00Z' => 'Snowflake 1 December 24 days until Christmas Snowflake',
-      '2026-12-07T12:00:00Z' => 'Snowman 7 December 18 days until Christmas Snowman',
+      '2026-12-07T12:00:00Z' => '7 December 18 days until Christmas Snowman',
       '2026-12-24T12:00:00Z' => "Santa's Sleigh 24 December 1 day until Christmas Santa's Sleigh",
       '2026-12-25T12:00:00Z' => 'Christmas Tree 25 December Merry Christmas! Christmas Tree',
       '2026-12-26T12:00:00Z' => 'Sleeping Santa 340 days until the Advent Calendar',
