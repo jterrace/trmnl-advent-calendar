@@ -59,6 +59,7 @@
   .advent-art--mirrored .advent-drawing { transform: scaleX(-1); }
   /* Shapes filled with the screen background: white, or black in dark mode */
   .advent-drawing .paper { fill: var(--framework-semantic-canvas-bg-color, white); }
+  .advent-drawing .paper-line { stroke: var(--framework-semantic-canvas-bg-color, white); }
   .advent-body { flex: 1; min-height: 0; width: 100%; }
   .advent-doors { width: 100%; height: auto; flex-shrink: 0; }
   .advent-doors--vertical { width: auto; height: 100%; }
@@ -95,35 +96,289 @@
 
 {% comment %} ==================== Art ==================== {% endcomment %}
 
-{% comment %} Today's drawing. Usage: {% render "door_art", door: door, door_name: door_name %} {% endcomment %}
+{% comment %}
+  Today's drawing. Usage: {% render "door_art", door: door %}, or door: 0 for the off-season sleeping Santa.
+  Style: 200x200, 8px round strokes in currentColor; class "paper" fills (and "paper-line" strokes) with the screen background.
+{% endcomment %}
 {% template door_art %}
-{% case door %}
-{% when 7 %}
 <svg class="advent-drawing" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
-  <!-- stick arms -->
+{% case door %}
+{% when 0 %}
+  <!-- Sleeping Santa -->
+  <path d="M24 30 H42 L24 50 H42 M50 10 H62 L50 24 H62" stroke-width="6" />
+  <circle cx="100" cy="114" r="34" class="paper" />
+  <path d="M62 118 Q60 178 100 186 Q140 178 138 118 Q124 136 100 134 Q76 136 62 118 Z" class="paper" />
+  <path d="M60 84 Q68 36 112 32 Q152 32 166 72 Q152 64 142 68 L150 84 Z" class="paper" />
+  <rect x="50" y="78" width="104" height="20" rx="10" class="paper" />
+  <circle cx="166" cy="76" r="12" class="paper" />
+  <path d="M80 112 Q87 118 94 112 M106 112 Q113 118 120 112" stroke-width="5" />
+  <path d="M80 136 Q90 126 100 134 Q110 126 120 136" stroke-width="6" />
+  <circle cx="100" cy="124" r="6" fill="currentColor" stroke="none" />
+{% when 1 %}
+  <!-- Snowflake: one arm with two pairs of branches, repeated six times -->
+  <path d="M100 100 V18 M100 46 L80 30 M100 46 L120 30 M100 72 L84 60 M100 72 L116 60" />
+  <path d="M100 100 V18 M100 46 L80 30 M100 46 L120 30 M100 72 L84 60 M100 72 L116 60" transform="rotate(60 100 100)" />
+  <path d="M100 100 V18 M100 46 L80 30 M100 46 L120 30 M100 72 L84 60 M100 72 L116 60" transform="rotate(120 100 100)" />
+  <path d="M100 100 V18 M100 46 L80 30 M100 46 L120 30 M100 72 L84 60 M100 72 L116 60" transform="rotate(180 100 100)" />
+  <path d="M100 100 V18 M100 46 L80 30 M100 46 L120 30 M100 72 L84 60 M100 72 L116 60" transform="rotate(240 100 100)" />
+  <path d="M100 100 V18 M100 46 L80 30 M100 46 L120 30 M100 72 L84 60 M100 72 L116 60" transform="rotate(300 100 100)" />
+  <circle cx="100" cy="100" r="10" fill="currentColor" stroke="none" />
+{% when 2 %}
+  <!-- Mitten -->
+  <path d="M70 116 Q34 116 30 88 Q28 64 50 64 Q66 66 70 86 Z" class="paper" />
+  <path d="M62 142 V72 Q62 28 101 28 Q140 28 140 72 V142 Z" class="paper" />
+  <rect x="52" y="140" width="98" height="36" rx="6" class="paper" />
+  <path d="M76 150 V166 M101 150 V166 M126 150 V166" stroke-width="6" />
+  <path d="M101 98 C81 84 85 68 97 70 Q101 72 101 78 Q101 72 105 70 C117 68 121 84 101 98 Z" fill="currentColor" stroke-width="4" />
+{% when 3 %}
+  <!-- Hot Cocoa -->
+  <path d="M140 98 Q172 98 172 124 Q172 150 140 150" />
+  <path d="M48 80 H140 V150 Q140 176 114 176 H74 Q48 176 48 150 Z" class="paper" />
+  <rect x="60" y="66" width="22" height="18" rx="4" class="paper" />
+  <rect x="88" y="62" width="22" height="18" rx="4" class="paper" />
+  <rect x="112" y="68" width="20" height="16" rx="4" class="paper" />
+  <path d="M70 52 Q62 42 70 32 Q78 22 70 12 M98 50 Q90 40 98 30 Q106 20 98 10 M124 54 Q116 44 124 34 Q132 24 124 14" stroke-width="6" />
+  <path d="M94 144 C74 130 78 114 90 116 Q94 118 94 124 Q94 118 98 116 C110 114 114 130 94 144 Z" fill="currentColor" stroke-width="4" />
+{% when 4 %}
+  <!-- Penguin -->
+  <path d="M52 100 Q30 130 42 152 M148 100 Q170 130 158 152" stroke-width="10" />
+  <ellipse cx="82" cy="180" rx="16" ry="8" fill="currentColor" />
+  <ellipse cx="118" cy="180" rx="16" ry="8" fill="currentColor" />
+  <ellipse cx="100" cy="106" rx="52" ry="72" fill="currentColor" />
+  <ellipse cx="100" cy="128" rx="36" ry="46" class="paper" stroke="none" />
+  <circle cx="84" cy="60" r="10" class="paper" stroke="none" />
+  <circle cx="116" cy="60" r="10" class="paper" stroke="none" />
+  <circle cx="86" cy="61" r="5" fill="currentColor" stroke="none" />
+  <circle cx="114" cy="61" r="5" fill="currentColor" stroke="none" />
+  <path d="M88 80 H112 L100 96 Z" fill="currentColor" stroke-width="4" />
+{% when 5 %}
+  <!-- Candy Cane: a thick stroke hollowed out by a thinner paper one, with stripes -->
+  <path d="M126 180 V72 Q126 28 90 28 Q56 28 56 62" stroke-width="36" />
+  <path d="M126 180 V72 Q126 28 90 28 Q56 28 56 62" stroke-width="20" class="paper-line" />
+  <path d="M117 168 L135 154 M117 140 L135 126 M117 112 L135 98 M117 84 L135 70 M100 21 L88 37 M66 32 L76 46" stroke-width="7" />
+{% when 6 %}
+  <!-- Pinecone -->
+  <path d="M100 40 V16 M100 24 L84 12 M100 24 L116 12" stroke-width="6" />
+  <path d="M100 186 Q52 150 54 98 Q56 54 100 40 Q144 54 146 98 Q148 150 100 186 Z" class="paper" />
+  <path d="M66 74 Q83 90 100 74 Q117 90 134 74 M57 104 Q71 122 86 104 Q100 122 114 104 Q129 122 143 104 M62 136 Q81 154 100 136 Q119 154 138 136 M80 162 Q90 176 100 162 Q110 176 120 162" stroke-width="6" />
+{% when 7 %}
+  <!-- Snowman -->
   <path d="M70 100 L36 78 M46 84 L40 66" />
   <path d="M130 100 L164 78 M154 84 L162 68" />
-  <!-- body -->
   <circle cx="100" cy="154" r="40" class="paper" />
   <circle cx="100" cy="100" r="30" class="paper" />
   <circle cx="100" cy="56" r="25" class="paper" />
-  <!-- scarf -->
   <path d="M76 79 Q100 89 124 79" stroke-width="12" />
   <path d="M112 84 L118 110" stroke-width="12" />
-  <!-- top hat -->
   <path d="M70 34 H130" stroke-width="10" />
   <rect x="82" y="6" width="36" height="26" rx="3" fill="currentColor" />
-  <!-- face -->
   <circle cx="91" cy="49" r="4" fill="currentColor" stroke="none" />
   <circle cx="109" cy="49" r="4" fill="currentColor" stroke="none" />
   <path d="M100 55 L123 58 L100 61 Z" fill="currentColor" stroke-width="3" />
   <path d="M90 67 Q100 73 110 67" stroke-width="4" />
-  <!-- buttons -->
   <circle cx="100" cy="96" r="4.5" fill="currentColor" stroke="none" />
   <circle cx="100" cy="112" r="4.5" fill="currentColor" stroke="none" />
   <circle cx="100" cy="146" r="4.5" fill="currentColor" stroke="none" />
-</svg>
-{% else %}
-<span class="label">{{ door_name }}</span>
+{% when 8 %}
+  <!-- Ice Skate -->
+  <path d="M58 26 H106 V96 Q106 110 120 114 L152 122 Q168 126 168 142 V152 H58 Z" class="paper" />
+  <path d="M90 44 L106 52 M90 64 L106 72 M90 84 L106 92" stroke-width="6" />
+  <path d="M76 152 V174 M150 152 V174" />
+  <path d="M42 174 H170 Q186 174 184 158" />
+{% when 9 %}
+  <!-- Polar Bear -->
+  <circle cx="60" cy="62" r="18" class="paper" />
+  <circle cx="140" cy="62" r="18" class="paper" />
+  <circle cx="60" cy="62" r="6" fill="currentColor" stroke="none" />
+  <circle cx="140" cy="62" r="6" fill="currentColor" stroke="none" />
+  <ellipse cx="100" cy="110" rx="60" ry="54" class="paper" />
+  <ellipse cx="100" cy="134" rx="28" ry="22" class="paper" />
+  <ellipse cx="100" cy="124" rx="11" ry="8" fill="currentColor" stroke="none" />
+  <path d="M100 130 V140 M88 144 Q100 152 112 144" stroke-width="6" />
+  <circle cx="78" cy="98" r="6" fill="currentColor" stroke="none" />
+  <circle cx="122" cy="98" r="6" fill="currentColor" stroke="none" />
+{% when 10 %}
+  <!-- Gingerbread Man -->
+  <path d="M72 80 H128 L162 96 Q174 102 168 114 Q162 124 150 118 L132 110 V132 L152 170 Q158 184 144 188 Q132 190 128 180 L100 148 L72 180 Q68 190 56 188 Q42 184 48 170 L68 132 V110 L50 118 Q38 124 32 114 Q26 102 38 96 Z" class="paper" />
+  <circle cx="100" cy="50" r="30" class="paper" />
+  <circle cx="90" cy="44" r="5" fill="currentColor" stroke="none" />
+  <circle cx="110" cy="44" r="5" fill="currentColor" stroke="none" />
+  <path d="M88 60 Q100 68 112 60" stroke-width="5" />
+  <circle cx="100" cy="98" r="5" fill="currentColor" stroke="none" />
+  <circle cx="100" cy="118" r="5" fill="currentColor" stroke="none" />
+  <path d="M42 104 Q46 112 50 104 M150 104 Q154 112 158 104 M58 172 Q62 180 66 172 M134 172 Q138 180 142 172" stroke-width="4" />
+{% when 11 %}
+  <!-- Ugly Sweater -->
+  <path d="M72 28 Q100 44 128 28 L170 50 L184 112 L156 118 L150 88 V178 H50 V88 L44 118 L16 112 L30 50 Z" class="paper" />
+  <path d="M74 30 Q100 56 126 30" stroke-width="6" />
+  <path d="M100 66 L116 96 H84 Z" fill="currentColor" stroke-width="4" />
+  <circle cx="70" cy="80" r="5" fill="currentColor" stroke="none" />
+  <circle cx="130" cy="80" r="5" fill="currentColor" stroke="none" />
+  <path d="M50 124 L60 112 L70 124 L80 112 L90 124 L100 112 L110 124 L120 112 L130 124 L140 112 L150 124" stroke-width="6" />
+  <path d="M50 146 L60 134 L70 146 L80 134 L90 146 L100 134 L110 146 L120 134 L130 146 L140 134 L150 146" stroke-width="6" />
+  <path d="M50 162 H150" stroke-width="6" />
+{% when 12 %}
+  <!-- Sled -->
+  <path d="M160 96 Q190 80 178 50" stroke-width="6" />
+  <path d="M60 108 V150 M100 108 V150 M140 108 V150" />
+  <rect x="38" y="84" width="124" height="24" rx="6" class="paper" />
+  <path d="M22 150 H158 Q182 150 182 128 Q182 112 166 112" />
+{% when 13 %}
+  <!-- Snow Globe -->
+  <circle cx="100" cy="88" r="66" class="paper" />
+  <path d="M53 134 Q100 122 147 134" stroke-width="6" />
+  <path d="M100 66 L122 116 H78 Z" fill="currentColor" stroke-width="4" />
+  <path d="M100 116 V128" />
+  <circle cx="66" cy="70" r="4" fill="currentColor" stroke="none" />
+  <circle cx="132" cy="62" r="4" fill="currentColor" stroke="none" />
+  <circle cx="80" cy="42" r="4" fill="currentColor" stroke="none" />
+  <circle cx="128" cy="100" r="4" fill="currentColor" stroke="none" />
+  <circle cx="64" cy="106" r="4" fill="currentColor" stroke="none" />
+  <circle cx="144" cy="84" r="4" fill="currentColor" stroke="none" />
+  <circle cx="108" cy="36" r="4" fill="currentColor" stroke="none" />
+  <path d="M54 148 H146 L158 184 H42 Z" class="paper" />
+{% when 14 %}
+  <!-- Holly: two spiky leaves and three berries -->
+  <path d="M0 0 L18 -26 Q28 -18 38 -24 L46 -38 Q56 -24 66 -28 L74 -34 Q78 -16 90 0 Q78 16 74 34 L66 28 Q56 24 46 38 L38 24 Q28 18 18 26 Z M6 0 H80" class="paper" transform="translate(94 112) rotate(215)" />
+  <path d="M0 0 L18 -26 Q28 -18 38 -24 L46 -38 Q56 -24 66 -28 L74 -34 Q78 -16 90 0 Q78 16 74 34 L66 28 Q56 24 46 38 L38 24 Q28 18 18 26 Z M6 0 H80" class="paper" transform="translate(106 112) rotate(-35)" />
+  <circle cx="86" cy="122" r="15" fill="currentColor" stroke="none" />
+  <circle cx="114" cy="122" r="15" fill="currentColor" stroke="none" />
+  <circle cx="100" cy="146" r="15" fill="currentColor" stroke="none" />
+{% when 15 %}
+  <!-- Reindeer -->
+  <path d="M82 62 L60 26 M70 44 L46 40 M64 34 L70 14 M118 62 L140 26 M130 44 L154 40 M136 34 L130 14" />
+  <ellipse cx="60" cy="84" rx="20" ry="10" transform="rotate(-25 60 84)" class="paper" />
+  <ellipse cx="140" cy="84" rx="20" ry="10" transform="rotate(25 140 84)" class="paper" />
+  <ellipse cx="100" cy="110" rx="40" ry="50" class="paper" />
+  <ellipse cx="100" cy="144" rx="30" ry="24" class="paper" />
+  <circle cx="100" cy="130" r="14" fill="currentColor" stroke="none" />
+  <circle cx="86" cy="98" r="5" fill="currentColor" stroke="none" />
+  <circle cx="114" cy="98" r="5" fill="currentColor" stroke="none" />
+  <path d="M90 154 Q100 162 110 154" stroke-width="5" />
+{% when 16 %}
+  <!-- Stocking -->
+  <path d="M68 24 Q60 6 76 6 Q88 8 84 24" stroke-width="6" />
+  <path d="M66 50 V128 Q66 176 110 176 H146 Q170 176 170 152 Q170 130 146 130 H124 V50 Z" class="paper" />
+  <path d="M148 132 Q138 154 148 174 M68 146 Q90 146 92 175" stroke-width="6" />
+  <rect x="56" y="22" width="78" height="34" rx="8" class="paper" />
+{% when 17 %}
+  <!-- Nutcracker -->
+  <path d="M38 196 Q42 158 72 150 H128 Q158 158 162 196" class="paper" />
+  <path d="M100 150 V196" stroke-width="6" />
+  <rect x="68" y="72" width="64" height="76" rx="8" class="paper" />
+  <rect x="66" y="12" width="68" height="56" rx="4" fill="currentColor" />
+  <circle cx="100" cy="40" r="9" class="paper" stroke="none" />
+  <rect x="60" y="64" width="80" height="14" rx="4" class="paper" />
+  <circle cx="86" cy="96" r="5" fill="currentColor" stroke="none" />
+  <circle cx="114" cy="96" r="5" fill="currentColor" stroke="none" />
+  <path d="M80 116 Q90 108 100 114 Q110 108 120 116" stroke-width="6" />
+  <rect x="84" y="124" width="32" height="12" rx="3" fill="currentColor" stroke-width="4" />
+  <path d="M94 124 V136 M106 124 V136" stroke-width="3" class="paper-line" />
+{% when 18 %}
+  <!-- Ornament -->
+  <circle cx="100" cy="28" r="10" stroke-width="6" />
+  <circle cx="100" cy="116" r="62" class="paper" />
+  <rect x="84" y="40" width="32" height="18" rx="3" fill="currentColor" />
+  <path d="M47 84 Q100 74 153 84 M42 140 Q100 152 158 140" stroke-width="6" />
+  <path d="M42 118 L56 106 L70 118 L84 106 L98 118 L112 106 L126 118 L140 106 L154 118" stroke-width="6" />
+{% when 19 %}
+  <!-- Wreath: two rings of leaves, berries and a bow -->
+  <ellipse cx="100" cy="36" rx="20" ry="11" class="paper" stroke-width="6" transform="rotate(0 100 96) rotate(-25 100 36)" />
+  <ellipse cx="100" cy="36" rx="20" ry="11" class="paper" stroke-width="6" transform="rotate(30 100 96) rotate(-25 100 36)" />
+  <ellipse cx="100" cy="36" rx="20" ry="11" class="paper" stroke-width="6" transform="rotate(60 100 96) rotate(-25 100 36)" />
+  <ellipse cx="100" cy="36" rx="20" ry="11" class="paper" stroke-width="6" transform="rotate(90 100 96) rotate(-25 100 36)" />
+  <ellipse cx="100" cy="36" rx="20" ry="11" class="paper" stroke-width="6" transform="rotate(120 100 96) rotate(-25 100 36)" />
+  <ellipse cx="100" cy="36" rx="20" ry="11" class="paper" stroke-width="6" transform="rotate(150 100 96) rotate(-25 100 36)" />
+  <ellipse cx="100" cy="36" rx="20" ry="11" class="paper" stroke-width="6" transform="rotate(180 100 96) rotate(-25 100 36)" />
+  <ellipse cx="100" cy="36" rx="20" ry="11" class="paper" stroke-width="6" transform="rotate(210 100 96) rotate(-25 100 36)" />
+  <ellipse cx="100" cy="36" rx="20" ry="11" class="paper" stroke-width="6" transform="rotate(240 100 96) rotate(-25 100 36)" />
+  <ellipse cx="100" cy="36" rx="20" ry="11" class="paper" stroke-width="6" transform="rotate(270 100 96) rotate(-25 100 36)" />
+  <ellipse cx="100" cy="36" rx="20" ry="11" class="paper" stroke-width="6" transform="rotate(300 100 96) rotate(-25 100 36)" />
+  <ellipse cx="100" cy="36" rx="20" ry="11" class="paper" stroke-width="6" transform="rotate(330 100 96) rotate(-25 100 36)" />
+  <ellipse cx="100" cy="56" rx="17" ry="9" class="paper" stroke-width="6" transform="rotate(15 100 96) rotate(25 100 56)" />
+  <ellipse cx="100" cy="56" rx="17" ry="9" class="paper" stroke-width="6" transform="rotate(45 100 96) rotate(25 100 56)" />
+  <ellipse cx="100" cy="56" rx="17" ry="9" class="paper" stroke-width="6" transform="rotate(75 100 96) rotate(25 100 56)" />
+  <ellipse cx="100" cy="56" rx="17" ry="9" class="paper" stroke-width="6" transform="rotate(105 100 96) rotate(25 100 56)" />
+  <ellipse cx="100" cy="56" rx="17" ry="9" class="paper" stroke-width="6" transform="rotate(135 100 96) rotate(25 100 56)" />
+  <ellipse cx="100" cy="56" rx="17" ry="9" class="paper" stroke-width="6" transform="rotate(165 100 96) rotate(25 100 56)" />
+  <ellipse cx="100" cy="56" rx="17" ry="9" class="paper" stroke-width="6" transform="rotate(195 100 96) rotate(25 100 56)" />
+  <ellipse cx="100" cy="56" rx="17" ry="9" class="paper" stroke-width="6" transform="rotate(225 100 96) rotate(25 100 56)" />
+  <ellipse cx="100" cy="56" rx="17" ry="9" class="paper" stroke-width="6" transform="rotate(255 100 96) rotate(25 100 56)" />
+  <ellipse cx="100" cy="56" rx="17" ry="9" class="paper" stroke-width="6" transform="rotate(285 100 96) rotate(25 100 56)" />
+  <ellipse cx="100" cy="56" rx="17" ry="9" class="paper" stroke-width="6" transform="rotate(315 100 96) rotate(25 100 56)" />
+  <ellipse cx="100" cy="56" rx="17" ry="9" class="paper" stroke-width="6" transform="rotate(345 100 96) rotate(25 100 56)" />
+  <circle cx="100" cy="34" r="7" fill="currentColor" stroke="none" />
+  <circle cx="153" cy="66" r="7" fill="currentColor" stroke="none" />
+  <circle cx="47" cy="66" r="7" fill="currentColor" stroke="none" />
+  <circle cx="48" cy="128" r="7" fill="currentColor" stroke="none" />
+  <circle cx="152" cy="128" r="7" fill="currentColor" stroke="none" />
+  <path d="M96 166 L82 192 M104 166 L118 192" />
+  <path d="M100 162 Q66 136 66 164 Q68 184 100 162 Z M100 162 Q134 136 134 164 Q132 184 100 162 Z" class="paper" />
+  <circle cx="100" cy="162" r="8" fill="currentColor" stroke="none" />
+{% when 20 %}
+  <!-- Elf -->
+  <path d="M64 108 L26 88 L66 140 Z M136 108 L174 88 L134 140 Z" class="paper" />
+  <circle cx="100" cy="124" r="42" class="paper" />
+  <path d="M58 86 Q74 40 116 20 Q150 8 166 34 Q144 32 134 50 Q136 68 142 86 Z" class="paper" />
+  <rect x="50" y="78" width="100" height="18" rx="8" class="paper" />
+  <circle cx="168" cy="38" r="11" class="paper" />
+  <circle cx="86" cy="120" r="5" fill="currentColor" stroke="none" />
+  <circle cx="114" cy="120" r="5" fill="currentColor" stroke="none" />
+  <path d="M84 142 Q100 156 116 142" stroke-width="6" />
+{% when 21 %}
+  <!-- Present -->
+  <rect x="36" y="86" width="128" height="94" rx="6" class="paper" />
+  <rect x="28" y="62" width="144" height="30" rx="6" class="paper" />
+  <rect x="88" y="62" width="24" height="118" fill="currentColor" stroke="none" />
+  <path d="M100 62 Q66 22 64 50 Q66 68 100 62 Z M100 62 Q134 22 136 50 Q134 68 100 62 Z" class="paper" />
+  <circle cx="100" cy="60" r="9" fill="currentColor" stroke="none" />
+{% when 22 %}
+  <!-- Gingerbread House -->
+  <rect x="128" y="40" width="20" height="40" class="paper" />
+  <rect x="46" y="90" width="108" height="90" class="paper" />
+  <path d="M28 100 L100 32 L172 100 Z" class="paper" />
+  <path d="M38 100 Q46 112 54 100 Q62 112 70 100 Q78 112 86 100 Q94 112 102 100 Q110 112 118 100 Q126 112 134 100 Q142 112 150 100 Q158 112 166 100" stroke-width="5" />
+  <circle cx="100" cy="64" r="6" fill="currentColor" stroke="none" />
+  <circle cx="78" cy="84" r="5" fill="currentColor" stroke="none" />
+  <circle cx="122" cy="84" r="5" fill="currentColor" stroke="none" />
+  <path d="M86 180 V148 Q86 134 100 134 Q114 134 114 148 V180" class="paper" />
+  <rect x="58" y="120" width="22" height="22" rx="3" class="paper" />
+  <rect x="120" y="120" width="22" height="22" rx="3" class="paper" />
+  <path d="M69 120 V142 M58 131 H80 M131 120 V142 M120 131 H142" stroke-width="4" />
+{% when 23 %}
+  <!-- Cookies and Milk -->
+  <path d="M38 48 L48 180 H96 L106 48 Z" class="paper" />
+  <path d="M41 84 H103" stroke-width="6" />
+  <path d="M56 100 V160" stroke-width="5" />
+  <circle cx="138" cy="138" r="42" class="paper" />
+  <circle cx="172" cy="104" r="18" class="paper" stroke="none" />
+  <path d="M154.6 99.4 A18 18 0 0 0 176.6 121.4" />
+  <circle cx="122" cy="120" r="6" fill="currentColor" stroke="none" />
+  <circle cx="150" cy="134" r="6" fill="currentColor" stroke="none" />
+  <circle cx="122" cy="152" r="6" fill="currentColor" stroke="none" />
+  <circle cx="152" cy="160" r="6" fill="currentColor" stroke="none" />
+  <circle cx="136" cy="110" r="5" fill="currentColor" stroke="none" />
+{% when 24 %}
+  <!-- Santa's Sleigh, with a present in the back -->
+  <rect x="84" y="68" width="30" height="26" rx="3" class="paper" />
+  <path d="M99 68 V94" stroke-width="5" />
+  <path d="M60 130 V160 M124 130 V160" />
+  <path d="M36 58 Q28 58 30 68 L42 130 H140 Q170 130 172 100 Q174 82 162 80 Q152 82 154 94 Q152 108 136 108 H96 Q84 108 82 94 L78 58 Z" class="paper" />
+  <path d="M50 96 Q58 84 64 98" stroke-width="5" />
+  <path d="M24 160 H156 Q182 160 180 138" />
+{% when 25 %}
+  <!-- Christmas Tree -->
+  <rect x="88" y="156" width="24" height="28" class="paper" />
+  <path d="M100 70 L166 160 H34 Z" class="paper" />
+  <path d="M100 50 L146 116 H54 Z" class="paper" />
+  <path d="M100 30 L130 76 H70 Z" class="paper" />
+  <circle cx="84" cy="100" r="6" fill="currentColor" stroke="none" />
+  <circle cx="118" cy="92" r="6" fill="currentColor" stroke="none" />
+  <circle cx="70" cy="142" r="6" fill="currentColor" stroke="none" />
+  <circle cx="104" cy="134" r="6" fill="currentColor" stroke="none" />
+  <circle cx="136" cy="146" r="6" fill="currentColor" stroke="none" />
+  <circle cx="100" cy="64" r="5" fill="currentColor" stroke="none" />
+  <path d="M100 8 L104.1 18.3 L115.2 19.1 L106.7 26.2 L109.4 36.9 L100 31 L90.6 36.9 L93.3 26.2 L84.8 19.1 L95.9 18.3 Z" fill="currentColor" stroke-width="4" />
 {% endcase %}
+</svg>
 {% endtemplate %}

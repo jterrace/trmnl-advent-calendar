@@ -2,7 +2,7 @@
   {% if state == "offseason" %}
   <div class="advent-main flex flex--row gap--xlarge w--full portrait:flex--col portrait:flex--center-x">
     <div class="advent-art flex flex--center-x flex--center-y flex-none">
-      <span class="label">Sleeping Santa</span>
+      {% render "door_art", door: 0 %}
     </div>
     <div class="flex flex--col flex--center-y flex--left gap--small flex-auto portrait:flex--center-x">
       <span class="value value--mega">{{ days_until_advent }}</span>
@@ -15,7 +15,7 @@
   <div class="advent-body flex flex--col gap--medium portrait:flex--row">
   <div class="advent-main flex flex--row gap--xlarge w--full portrait:flex--col portrait:flex--center-x">
     <div class="advent-art flex flex--center-x flex--center-y flex-none">
-      {% render "door_art", door: door, door_name: door_name %}
+      {% render "door_art", door: door %}
     </div>
     <div class="flex flex--col flex--center-y flex--left gap--small flex-auto portrait:flex--center-x">
       <span class="value value--mega">{{ day }}</span>

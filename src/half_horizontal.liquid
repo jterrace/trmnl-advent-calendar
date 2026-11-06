@@ -2,9 +2,9 @@
   <div class="advent-main flex flex--row gap--large w--full">
     <div class="advent-art flex flex--center-x flex--center-y flex-none">
       {% if state == "offseason" %}
-        <span class="label label--small">Sleeping Santa</span>
+        {% render "door_art", door: 0 %}
       {% else %}
-        {% render "door_art", door: door, door_name: door_name %}
+        {% render "door_art", door: door %}
       {% endif %}
     </div>
 
@@ -31,12 +31,12 @@
       {% endif %}
     </div>
 
-    {% comment %} Second copy, mirrored to face inward. Hidden in portrait, where there's no room. {% endcomment %}
-    <div class="advent-art advent-art--mirrored flex flex--center-x flex--center-y flex-none portrait:hidden">
+    {% comment %} Second copy, mirrored to face inward (except the Zzz, which would read backwards). Hidden in portrait, where there's no room. {% endcomment %}
+    <div class="advent-art{% unless state == "offseason" %} advent-art--mirrored{% endunless %} flex flex--center-x flex--center-y flex-none portrait:hidden">
       {% if state == "offseason" %}
-        <span class="label label--small">Sleeping Santa</span>
+        {% render "door_art", door: 0 %}
       {% else %}
-        {% render "door_art", door: door, door_name: door_name %}
+        {% render "door_art", door: door %}
       {% endif %}
     </div>
   </div>
