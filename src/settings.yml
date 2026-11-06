@@ -17,6 +17,7 @@ custom_fields:
 - keyname: about
   name: About This Plugin
   field_type: author_bio
+  category: calendar,art
   description: A daily advent calendar for December, with a new drawing behind each door and a countdown to Christmas. A sleeping Santa counts down the rest of the year.
   github_url: https://github.com/jterrace/trmnl-advent-calendar
 name: Advent Calendar
