@@ -1,4 +1,6 @@
 <div class="layout layout--col gap">
+  {% comment %} Doors below in landscape, down the right side in portrait {% endcomment %}
+  <div class="advent-body flex flex--col gap portrait:flex--row">
   <div class="advent-main flex flex--row gap--medium w--full portrait:flex--col portrait:flex--center-x">
     {% if state == "offseason" %}
     <div class="advent-art flex flex--center-x flex--center-y flex-none">
@@ -27,8 +29,10 @@
     {% endif %}
   </div>
   {% unless state == "offseason" %}
-  {% render "doors", door: door, compact: true %}
+  {% render "doors", door: door, compact: true, class: "portrait:hidden" %}
+  {% render "doors", door: door, compact: true, vertical: true, class: "landscape:hidden" %}
   {% endunless %}
+  </div>
 </div>
 
 <div class="title_bar">
