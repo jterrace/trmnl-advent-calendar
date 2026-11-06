@@ -49,7 +49,9 @@
     border: 4px solid currentColor;
     border-radius: 16px;
   }
-  /* Portrait half horizontal is taller than wide: size the art by width so the text has room */
+  /* Portrait slots are taller than wide: size the art by width so the text has room */
+  .screen--portrait .view--full .advent-art { height: auto; width: 80%; }
+  .screen--portrait .view--quadrant .advent-art { height: auto; width: 65%; }
   .screen--portrait .view--half_horizontal .advent-art { height: auto; width: 45%; align-self: center; }
   .advent-drawing { width: 85%; height: 85%; }
   .advent-art--mirrored .advent-drawing { transform: scaleX(-1); }
