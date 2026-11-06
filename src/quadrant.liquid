@@ -1,7 +1,7 @@
 <div class="layout layout--col gap">
   <div class="advent-main flex flex--row gap--medium w--full">
     {% if state == "offseason" %}
-    <div class="advent-art flex-none">
+    <div class="advent-art flex flex--center-x flex--center-y flex-none">
       <span class="label label--small">Sleeping Santa</span>
     </div>
     <div class="flex flex--col flex--center-y flex--left flex-auto">
@@ -10,7 +10,7 @@
       <span class="title">Advent</span>
     </div>
     {% else %}
-    <div class="advent-art flex-none">
+    <div class="advent-art flex flex--center-x flex--center-y flex-none">
       {% render "door_art", door: door, door_name: door_name %}
     </div>
     <div class="flex flex--col flex--center-y flex--left flex-auto">

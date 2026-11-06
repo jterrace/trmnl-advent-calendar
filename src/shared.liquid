@@ -41,17 +41,18 @@
 {% endif %}
 
 <style>
+  /* Framework CSS is in @layers, so anything here beats it: don't set display, or classes like portrait:hidden stop working */
   .advent-main { flex: 1; min-height: 0; }
   .advent-art {
     height: 100%;
     aspect-ratio: 1;
     border: 4px solid currentColor;
     border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
+  /* Portrait half horizontal is taller than wide: size the art by width so the text has room */
+  .screen--portrait .view--half_horizontal .advent-art { height: auto; width: 45%; align-self: center; }
   .advent-drawing { width: 85%; height: 85%; }
+  .advent-art--mirrored .advent-drawing { transform: scaleX(-1); }
   /* Shapes filled with the screen background: white, or black in dark mode */
   .advent-drawing .paper { fill: var(--framework-semantic-canvas-bg-color, white); }
   .advent-doors { width: 100%; height: auto; flex-shrink: 0; }

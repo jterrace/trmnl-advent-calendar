@@ -1,7 +1,50 @@
-<div class="layout layout--col layout--center">
-  <span class="title title--large">Half horizontal</span>
+<div class="layout layout--col gap">
+  <div class="advent-main flex flex--row gap--large w--full">
+    <div class="advent-art flex flex--center-x flex--center-y flex-none">
+      {% if state == "offseason" %}
+        <span class="label label--small">Sleeping Santa</span>
+      {% else %}
+        {% render "door_art", door: door, door_name: door_name %}
+      {% endif %}
+    </div>
+
+    <div class="flex flex--row flex--center gap--large flex-auto portrait:flex--col portrait:gap--small">
+      {% if state == "offseason" %}
+      <span class="value value--xxlarge portrait:value--xlarge">{{ days_until_advent }}</span>
+      <div class="flex flex--col flex--left">
+        <span class="title title--large">{% if days_until_advent == 1 %}day{% else %}days{% endif %} until</span>
+        <span class="title title--large">Advent</span>
+      </div>
+      {% else %}
+      <span class="value value--xxxlarge portrait:value--xlarge">{{ day }}</span>
+      <div class="flex flex--col flex--left gap--small">
+        <span class="title title--large">December</span>
+        <span class="title">
+          {% if state == "christmas" %}
+            Merry Christmas!
+          {% else %}
+            <b>{{ days_until_christmas }}</b> {% if days_until_christmas == 1 %}day{% else %}days{% endif %} until Christmas
+          {% endif %}
+        </span>
+        <span class="label label--large label--inverted">{{ door_name }}</span>
+      </div>
+      {% endif %}
+    </div>
+
+    {% comment %} Second copy, mirrored to face inward. Hidden in portrait, where there's no room. {% endcomment %}
+    <div class="advent-art advent-art--mirrored flex flex--center-x flex--center-y flex-none portrait:hidden">
+      {% if state == "offseason" %}
+        <span class="label label--small">Sleeping Santa</span>
+      {% else %}
+        {% render "door_art", door: door, door_name: door_name %}
+      {% endif %}
+    </div>
+  </div>
+  {% unless state == "offseason" %}
+  {% render "doors", door: door %}
+  {% endunless %}
 </div>
 
 <div class="title_bar">
-  <span class="title">My Plugin</span>
+  <span class="title">Advent Calendar</span>
 </div>
