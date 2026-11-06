@@ -1,4 +1,4 @@
-# TRMNL Advent Calendar
+# <img src="img/icon.svg" width="40" align="top"> TRMNL Advent Calendar
 
 A daily advent calendar for [TRMNL](https://trmnl.com) e-ink displays.
 
