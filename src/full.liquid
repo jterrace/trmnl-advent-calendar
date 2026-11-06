@@ -1,4 +1,16 @@
 <div class="layout layout--col gap--medium">
+  {% if state == "offseason" %}
+  <div class="advent-main flex flex--row gap--xlarge w--full">
+    <div class="advent-art flex-none">
+      <span class="label">Sleeping Santa</span>
+    </div>
+    <div class="flex flex--col flex--center-y flex--left gap--small flex-auto">
+      <span class="value value--mega">{{ days_until_advent }}</span>
+      <span class="title title--xlarge">{% if days_until_advent == 1 %}day{% else %}days{% endif %} until the</span>
+      <span class="title title--xlarge">Advent Calendar</span>
+    </div>
+  </div>
+  {% else %}
   <div class="advent-main flex flex--row gap--xlarge w--full">
     <div class="advent-art flex-none">
       <span class="label">{{ door_name }}</span>
@@ -7,7 +19,11 @@
       <span class="value value--mega">{{ day }}</span>
       <span class="title title--xlarge">December</span>
       <span class="title title--large">
-        <b>{{ days_until_christmas }}</b> {% if days_until_christmas == 1 %}day{% else %}days{% endif %} until Christmas
+        {% if state == "christmas" %}
+          Merry Christmas!
+        {% else %}
+          <b>{{ days_until_christmas }}</b> {% if days_until_christmas == 1 %}day{% else %}days{% endif %} until Christmas
+        {% endif %}
       </span>
       <span class="label label--xlarge label--inverted">{{ door_name }}</span>
     </div>
@@ -26,6 +42,7 @@
       {% endif %}
     {% endfor %}
   </svg>
+  {% endif %}
 </div>
 
 <div class="title_bar">

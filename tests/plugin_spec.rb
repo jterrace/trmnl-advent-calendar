@@ -21,9 +21,15 @@ RSpec.describe 'Advent Calendar' do
     end
 
     {
+      '2026-11-30T12:00:00Z' => 'Sleeping Santa 1 day until the Advent Calendar',
       '2026-12-01T12:00:00Z' => 'Snowflake 1 December 24 days until Christmas Snowflake',
       '2026-12-07T12:00:00Z' => 'Snowman 7 December 18 days until Christmas Snowman',
-      '2026-12-24T12:00:00Z' => "Santa's Sleigh 24 December 1 day until Christmas Santa's Sleigh"
+      '2026-12-24T12:00:00Z' => "Santa's Sleigh 24 December 1 day until Christmas Santa's Sleigh",
+      '2026-12-25T12:00:00Z' => 'Christmas Tree 25 December Merry Christmas! Christmas Tree',
+      '2026-12-26T12:00:00Z' => 'Sleeping Santa 340 days until the Advent Calendar',
+      '2026-12-31T12:00:00Z' => 'Sleeping Santa 335 days until the Advent Calendar',
+      '2027-01-01T12:00:00Z' => 'Sleeping Santa 334 days until the Advent Calendar',
+      '2028-02-29T12:00:00Z' => 'Sleeping Santa 276 days until the Advent Calendar'
     }.each do |now, expected|
       it "shows '#{expected}' at #{now}" do
         expect(screen_text(now)).to eq(expected)
@@ -31,16 +37,10 @@ RSpec.describe 'Advent Calendar' do
     end
 
     it "uses the user's time zone, not UTC" do
-      # 04:30 UTC on Dec 2 is still 23:30 on Dec 1 in New York
-      expect(screen_text('2026-12-02T04:30:00Z', zone: 'America/New_York')).to include('24 days until Christmas')
-      # 15:30 UTC on Dec 6 is already 00:30 on Dec 7 in Tokyo
-      expect(screen_text('2026-12-06T15:30:00Z', zone: 'Asia/Tokyo')).to include('18 days until Christmas')
-    end
-
-    # Restore as each screen gets built: Nov 30 => 1 day until advent, Dec 25 => Christmas,
-    # Dec 26 => 340, Dec 31 => 335, Jan 1 => 334, Feb 29 2028 => 276.
-    it 'shows the Christmas and off-season screens' do
-      skip 'Christmas and off-season screens are not built yet'
+      # 04:30 UTC on Dec 1 is still 23:30 on Nov 30 in New York
+      expect(screen_text('2026-12-01T04:30:00Z', zone: 'America/New_York')).to include('1 day until the Advent Calendar')
+      # 15:30 UTC on Dec 24 is already 00:30 on Christmas in Tokyo
+      expect(screen_text('2026-12-24T15:30:00Z', zone: 'Asia/Tokyo')).to include('Merry Christmas!')
     end
   end
 end
