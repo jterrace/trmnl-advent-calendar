@@ -1,5 +1,5 @@
 <div class="layout layout--col gap">
-  {% comment %} Taller than wide in both orientations: art over text, doors down the right side {% endcomment %}
+  {% comment %} Taller than wide in both orientations: art over text (and again below in portrait), doors down the right side {% endcomment %}
   <div class="advent-body flex flex--row gap">
   <div class="advent-main flex flex--col flex--center-x flex--center-y gap--medium">
     <div class="advent-art flex flex--center-x flex--center-y flex-none">
@@ -24,6 +24,15 @@
           <b>{{ days_until_christmas }}</b> {% if days_until_christmas == 1 %}day{% else %}days{% endif %} to go
         {% endif %}
       </span>
+      {% endif %}
+    </div>
+
+    {% comment %} Second copy below, mirrored (except the Zzz, which would read backwards). Portrait only: landscape has no room. {% endcomment %}
+    <div class="advent-art{% unless state == "offseason" %} advent-art--mirrored{% endunless %} flex flex--center-x flex--center-y flex-none landscape:hidden">
+      {% if state == "offseason" %}
+        {% render "door_art", door: 0 %}
+      {% else %}
+        {% render "door_art", door: door %}
       {% endif %}
     </div>
   </div>
