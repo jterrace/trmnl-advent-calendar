@@ -11,13 +11,13 @@
     </div>
     <div class="flex flex--col flex--center-x text--center">
       {% if state == "offseason" %}
-      <span class="value value--xxlarge portrait:value--xlarge">{{ days_until_advent }}</span>
-      <span class="title title--large">{% if days_until_advent == 1 %}day{% else %}days{% endif %} until</span>
-      <span class="title title--large">Advent</span>
+      <span class="value value--xxlarge lg:value--xxxlarge portrait:value--xlarge">{{ days_until_advent }}</span>
+      <span class="title title--large lg:title--xlarge">{% if days_until_advent == 1 %}day{% else %}days{% endif %} until</span>
+      <span class="title title--large lg:title--xlarge">Advent</span>
       {% else %}
-      <span class="value value--xxlarge portrait:value--xlarge">{{ day }}</span>
-      <span class="title title--large">December</span>
-      <span class="title">
+      <span class="value value--xxlarge lg:value--xxxlarge portrait:value--xlarge">{{ day }}</span>
+      <span class="title title--large lg:title--xlarge">December</span>
+      <span class="title lg:title--large">
         {% if state == "christmas" %}
           Merry Christmas!
         {% else %}

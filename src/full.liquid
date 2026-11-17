@@ -5,9 +5,9 @@
       {% render "door_art", door: 0 %}
     </div>
     <div class="flex flex--col flex--center-y flex--left gap--small flex-auto portrait:flex--center-x">
-      <span class="value value--mega">{{ days_until_advent }}</span>
-      <span class="title title--xlarge">{% if days_until_advent == 1 %}day{% else %}days{% endif %} until the</span>
-      <span class="title title--xlarge">Advent Calendar</span>
+      <span class="value value--mega lg:value--giga">{{ days_until_advent }}</span>
+      <span class="title title--xlarge lg:title--xxlarge">{% if days_until_advent == 1 %}day{% else %}days{% endif %} until the</span>
+      <span class="title title--xlarge lg:title--xxlarge">Advent Calendar</span>
     </div>
   </div>
   {% else %}
@@ -18,16 +18,16 @@
       {% render "door_art", door: door %}
     </div>
     <div class="flex flex--col flex--center-y flex--left gap--small flex-auto portrait:flex--center-x">
-      <span class="value value--mega">{{ day }}</span>
-      <span class="title title--xlarge">December</span>
-      <span class="title title--large">
+      <span class="value value--mega lg:value--giga">{{ day }}</span>
+      <span class="title title--xlarge lg:title--xxlarge">December</span>
+      <span class="title title--large lg:title--xlarge">
         {% if state == "christmas" %}
           Merry Christmas!
         {% else %}
           <b>{{ days_until_christmas }}</b> {% if days_until_christmas == 1 %}day{% else %}days{% endif %} until Christmas
         {% endif %}
       </span>
-      <span class="label label--xlarge label--inverted">{{ door_name }}</span>
+      <span class="label label--xlarge lg:label--xxlarge label--inverted">{{ door_name }}</span>
     </div>
   </div>
 
