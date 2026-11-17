@@ -21,5 +21,5 @@ custom_fields:
   description: A daily advent calendar for December, with a new drawing behind each door and a countdown to Christmas. A sleeping Santa counts down the rest of the year.
   github_url: https://github.com/jterrace/trmnl-advent-calendar
 name: Advent Calendar
-description: 'A fun Christmas Advent calendar'
-refresh_interval: 90
+description: A fun Christmas Advent calendar
+refresh_interval: 120
