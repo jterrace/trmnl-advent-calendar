@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Renders dev/render_all_spec.rb in parallel and merges the reports into gallery/index.html.
+# Renders dev/render_multi_spec.rb in parallel and merges the reports into gallery/index.html.
 # JOBS processes, default half the cores: more starves the Firefoxes and trips trmnlp's font timeout.
 # See "Seeing all possible outputs" in the README.
 
@@ -12,7 +12,7 @@ require 'trmnlp/testing/report'
 
 Dir.chdir(File.expand_path('..', __dir__))
 
-SPEC = 'dev/render_all_spec.rb'
+SPEC = 'dev/render_multi_spec.rb'
 # The documentation format prints one line per finished example, indented under "Render all"
 EXAMPLE_LINE = /^ +\d{4}-/
 BAR_WIDTH = 40

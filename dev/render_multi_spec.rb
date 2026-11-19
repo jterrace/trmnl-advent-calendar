@@ -11,7 +11,7 @@ RSpec.describe 'Render all' do
   dates = (1..25).map { |day| format('2026-12-%02d', day) } + ['2026-11-30']
   combos = dates.product(%i[landscape portrait], [false, true])
 
-  # dev/render_multi.rb runs one process per shard, each taking a contiguous slice so the merged report keeps this order
+  # dev/render_all.rb runs one process per shard, each taking a contiguous slice so the merged report keeps this order
   shard, shards = ENV.fetch('RENDER_SHARD', '1/1').split('/').map(&:to_i)
   combos = combos.each_slice((combos.size / shards.to_f).ceil).to_a[shard - 1] || []
 
