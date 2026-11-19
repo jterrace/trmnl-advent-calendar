@@ -4,5 +4,5 @@ _build/
 # trmnlp test --report output
 report/
 
-# dev/gallery_spec.rb output
+# dev/render_all_spec.rb output
 gallery/

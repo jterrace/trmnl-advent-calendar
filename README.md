@@ -37,7 +37,7 @@ faketime '2008-12-07 08:15:42' trmnlp serve
 Render every day in every view, light and dark, landscape and portrait:
 
 ```
-trmnlp test dev/gallery_spec.rb --report gallery
+ruby dev/render_multi.rb
 ```
 
-Then open `gallery/index.html`. Add devices with e.g. `DEVICES=og_png,v2` (default `og_png`).
+Then open `gallery/index.html`. Add devices with e.g. `DEVICES=og_png,v2` (default `og_png`). It runs `JOBS` processes in parallel (default half the cores).
