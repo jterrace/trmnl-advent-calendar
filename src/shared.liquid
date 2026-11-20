@@ -43,23 +43,33 @@
 <style>
   /* Framework CSS is in @layers, so anything here beats it: don't set display, or classes like portrait:hidden stop working */
   .advent-main { flex: 1; min-height: 0; }
+  /* Sized by height and shrunk a little, bottom-aligned, so the snow on top isn't cut off */
   .advent-art {
-    height: 100%;
+    height: 92%;
+    align-self: flex-end;
     aspect-ratio: 1;
     border: 4px solid currentColor;
     border-radius: 16px;
+    position: relative;
   }
-  /* Portrait slots are taller than wide: size the art by width so the text has room */
-  .screen--portrait .view--full .advent-art { height: auto; width: 80%; }
-  .screen--portrait .view--quadrant .advent-art { height: auto; width: 65%; }
-  .screen--portrait .view--half_horizontal .advent-art { height: auto; width: 45%; align-self: center; }
-  .view--half_vertical .advent-art { height: auto; width: 45%; }
-  .screen--portrait .view--half_vertical .advent-art { width: 70%; }
+  /* Portrait slots are taller than wide: size the art by width so the text has room,
+     with a top margin of 8% of that width so the snow on top isn't cut off */
+  /* Full portrait is also capped at 45% of the view's height, or TRMNL X (less tall for its width) overflows.
+     cqh, not vh: TRMNL X is laid out at 780px wide and scaled up, so vh is the wrong size. */
+  .view--full { container-type: size; }
+  .screen--portrait .view--full .advent-art { height: auto; width: min(80%, 45cqh); margin-top: calc(min(80%, 45cqh) * 0.08); align-self: auto; }
+  .screen--portrait .view--quadrant .advent-art { height: auto; width: 65%; margin-top: calc(65% * 0.08); align-self: auto; }
+  .screen--portrait .view--half_horizontal .advent-art { height: auto; width: 45%; margin-top: calc(45% * 0.08); align-self: center; }
+  .view--half_vertical .advent-art { height: auto; width: 45%; margin-top: calc(45% * 0.08); align-self: auto; }
+  .screen--portrait .view--half_vertical .advent-art { width: 70%; margin-top: calc(70% * 0.08); }
   .advent-drawing { width: 85%; height: 85%; }
   .advent-art--mirrored .advent-drawing { transform: scaleX(-1); }
   /* Shapes filled with the screen background: white, or black in dark mode */
   .advent-drawing .paper { fill: var(--framework-semantic-canvas-bg-color, white); }
   .advent-drawing .paper-line { stroke: var(--framework-semantic-canvas-bg-color, white); }
+  /* Snow draped over the frame's top edge: its middle sits on the border line */
+  .advent-snow { position: absolute; left: -4px; top: -2px; width: calc(100% + 8px); height: auto; overflow: visible; transform: translateY(-50%); }
+  .advent-snow path { fill: var(--framework-semantic-canvas-bg-color, white); }
   .advent-body { flex: 1; min-height: 0; width: 100%; }
   .advent-doors { width: 100%; height: auto; flex-shrink: 0; }
   .advent-doors--vertical { width: auto; height: 100%; }
@@ -101,6 +111,10 @@
   Style: 200x200, 8px round strokes in currentColor; class "paper" fills (and "paper-line" strokes) with the screen background.
 {% endcomment %}
 {% template door_art %}
+<svg class="advent-snow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 28">
+  <!-- mounds above the frame line (y=14), a short drip and a long one below it; the stroke stays 4px, like the frame, at any size -->
+  <path d="M2 18 Q2 10 12 9 Q20 2 34 6 Q46 0 60 6 Q74 1 88 7 Q102 2 116 7 Q130 0 146 6 Q160 2 172 8 Q190 6 198 18 Q198 22 190 22 H158 Q151 22 150.5 29 Q150 37 145.5 37 Q141 37 141 30 Q141 22 134 22 H80 Q74 22 73.5 25 Q73 28 70.5 28 Q68 28 67.5 25 Q67 22 61 22 H10 Q2 22 2 18 Z" stroke="currentColor" stroke-width="4" stroke-linejoin="round" vector-effect="non-scaling-stroke" />
+</svg>
 <svg class="advent-drawing" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
 {% case door %}
 {% when 0 %}
