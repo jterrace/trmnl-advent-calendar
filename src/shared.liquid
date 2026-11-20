@@ -8,6 +8,11 @@
 
 {% comment %} TRMNL's days_ago returns a Date in the given zone, so 0 days ago is the user's local today {% endcomment %}
 {% assign today = 0 | days_ago: trmnl.user.time_zone_iana %}
+{% comment %} Fixed Date setting, if set, replaces today (e.g. to keep the recipe preview on a December day) {% endcomment %}
+{% assign fixed_date = trmnl.plugin_settings.custom_fields_values.fixed_date %}
+{% if fixed_date != blank %}
+  {% assign today = fixed_date | date: "%Y-%m-%d" | append: "T00:00:00Z" %}
+{% endif %}
 {% assign year = today | date: "%Y" | plus: 0 %}
 {% assign month = today | date: "%-m" | plus: 0 %}
 {% assign day = today | date: "%-d" | plus: 0 %}

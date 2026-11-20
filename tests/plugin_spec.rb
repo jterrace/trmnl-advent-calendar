@@ -16,7 +16,7 @@ RSpec.describe 'Advent Calendar' do
   describe 'date logic' do
     # Renders the full view at `now` for a user in `zone` and reads back its visible text.
     def screen_text(now, zone: 'Etc/UTC')
-      html = trmnl.render(now:, variables: { trmnl: { user: { time_zone_iana: zone } } }).html
+      html = trmnl.render(now:, custom_fields:, variables: { trmnl: { user: { time_zone_iana: zone } } }).html
       Nokogiri::HTML(html).css('.layout').text.split.join(' ')
     end
 
@@ -41,6 +41,26 @@ RSpec.describe 'Advent Calendar' do
       expect(screen_text('2026-12-01T04:30:00Z', zone: 'America/New_York')).to include('1 day until the Advent Calendar')
       # 15:30 UTC on Dec 24 is already 00:30 on Christmas in Tokyo
       expect(screen_text('2026-12-24T15:30:00Z', zone: 'Asia/Tokyo')).to include('Merry Christmas!')
+    end
+
+    context 'with a Fixed Date' do
+      let(:custom_fields) { { fixed_date: '2026-12-01' } }
+
+      it 'shows that day instead of today' do
+        expect(screen_text('2027-03-15T12:00:00Z')).to eq('1 December 24 days until Christmas Snowflake')
+      end
+
+      it 'ignores the time zone' do
+        expect(screen_text('2027-03-15T23:30:00Z', zone: 'Asia/Tokyo')).to include('Snowflake')
+      end
+    end
+
+    context 'with an off-season Fixed Date' do
+      let(:custom_fields) { { fixed_date: '2026-11-30' } }
+
+      it 'counts down from that day' do
+        expect(screen_text('2027-03-15T12:00:00Z')).to eq('1 day until the Advent Calendar')
+      end
     end
   end
 end
