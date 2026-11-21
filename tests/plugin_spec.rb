@@ -43,6 +43,10 @@ RSpec.describe 'Advent Calendar' do
       expect(screen_text('2026-12-24T15:30:00Z', zone: 'Asia/Tokyo')).to include('Merry Christmas!')
     end
 
+    it 'uses UTC when there is no time zone, as on the public demo page' do
+      expect(screen_text('2026-11-20T12:00:00Z', zone: nil)).to eq('11 days until the Advent Calendar')
+    end
+
     context 'with a Fixed Date' do
       let(:custom_fields) { { fixed_date: '2026-12-01' } }
 

@@ -6,8 +6,10 @@
     days_until_advent     days until the next Dec 1 (offseason only)
 {% endcomment %}
 
-{% comment %} TRMNL's days_ago returns a Date in the given zone, so 0 days ago is the user's local today {% endcomment %}
-{% assign today = 0 | days_ago: trmnl.user.time_zone_iana %}
+{% comment %} TRMNL's days_ago returns a Date in the given zone, so 0 days ago is the user's local today.
+   The recipe's public demo page has no user, and with no zone days_ago returns a date 30 years off, so fall back to UTC. {% endcomment %}
+{% assign time_zone = trmnl.user.time_zone_iana | default: "Etc/UTC" %}
+{% assign today = 0 | days_ago: time_zone %}
 {% comment %} Fixed Date setting, if set, replaces today (e.g. to keep the recipe preview on a December day) {% endcomment %}
 {% assign fixed_date = trmnl.plugin_settings.custom_fields_values.fixed_date %}
 {% if fixed_date != blank %}
